@@ -10,10 +10,7 @@ It's an ideal companion to testing build time Infrastructure as Code scanning to
 ## Table of Contents
 
 * [Introduction](#introduction)
-* [Getting Started](#getting-started)
-  * [AWS](#aws-setup)
-  * [Azure](#azure-setup)
-  * [GCP](#gcp-setup)
+* [Installation](#Installation)
 * [Contributing](#contributing)
 * [Support](#support)
 
