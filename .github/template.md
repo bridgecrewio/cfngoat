@@ -5,6 +5,8 @@
 
 Cfngoat is one  of Bridgecrew's "Vulnerable by Design" Infrastructure as Code repositories, a learning and training project that demonstrates how common configuration errors can find their way into production cloud environments.
 
+![Cfngoat](.github/cfngoat-removebg-preview.png)
+
 It's an ideal companion to testing build time Infrastructure as Code scanning tools, such as [Bridgecrew](https://bridgecrew.io/) & [Checkov](https://checkov.io) 
 
 ## Table of Contents
