@@ -1,5 +1,8 @@
 # Cfngoat - Vulnerable Cloudformation Template
 [![Maintained by Bridgecrew.io](https://img.shields.io/badge/maintained%20by-bridgecrew.io-blueviolet)](https://bridgecrew.io/?utm_source=github&utm_medium=organic_oss&utm_campaign=cfngoat)
+[![Errors](https://www.bridgecrew.cloud/badges/github/bridgecrewio/cfngoat/general)](https://www.bridgecrew.cloud/incidents/?ALL_SEVERITY=true&Open=true&accounts=bridgecrewio%2Fcfngoat&utm_source=github&utm_medium=badge&utm_campaign=cfngoat)
+[![cis_aws](https://www.bridgecrew.cloud/badges/github/bridgecrewio/cfngoat/cis_aws)](https://www.bridgecrew.cloud/incidents/?ALL_SEVERITY=true&Open=true&accounts=bridgecrewio%2Fcfngoat&benchmarks=CIS+AWS+V1.2&utm_source=github&utm_medium=badge&utm_campaign=cfngoat)
+[![pci](https://www.bridgecrew.cloud/badges/github/bridgecrewio/cfngoat/pci)](https://www.bridgecrew.cloud/incidents/?ALL_SEVERITY=true&Open=true&accounts=bridgecrewio%2Fcfngoat&benchmarks=PCI-DSS+V3.2&utm_source=github&utm_medium=badge&utm_campaign=cfngoat)
 [![Join us on Slack!](https://slack.bridgecrew.io/badge.svg)](https://slack.bridgecrew.io/?utm_source=github&utm_medium=organic_oss&utm_campaign=cfngoat)
 
 
