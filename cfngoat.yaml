@@ -892,3 +892,290 @@ Outputs:
     Description: DB Endpoint 
     Value: !Sub ${DefaultDB.Endpoint.Address}:{DefaultDB.Endpoint.Port}
 
+
+
+-----
+Test
+-----
+
+  OperationsBucket:
+    # not encrypted, no access logs
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-operations"
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-operations"
+
+  DataScienceBucket:
+    # not encrypted
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-data-science"
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled
+      LoggingConfiguration: 
+        DestinationBucketName: !Ref LogsBucket
+        LogFilePrefix: log/
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-data-science"
+
+  LogsBucket:
+    # not encrypted
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-logs"
+      AccessControl: LogDeliveryWrite
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption: 
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              KMSMasterKeyID: !Ref LogsKey
+              SSEAlgorithm: aws:kms
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-logs"
+
+   ########################
+   ### Clean S3 Buckets ### 
+   ########################
+  CleanupRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: [lambda.amazonaws.com]
+          Action: ['sts:AssumeRole']
+      Path: /
+      Policies:
+      - PolicyName: lambda-execute
+        PolicyDocument:
+          Statement:
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource: '*'
+      - PolicyName: s3-object-delete
+        PolicyDocument:
+          Statement:
+          - Effect: Allow
+            Action:
+              - s3:GetObject
+              - s3:ListBucket
+              - s3:DeleteObject
+            Resource: '*'
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-cleanup-role"
+        - Key: Environment
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}"
+
+  CleanBucketFunction:
+    Type: "AWS::Lambda::Function"
+    DependsOn: CleanupRole
+    Properties:
+      Handler: index.clearS3Bucket
+      Role: 
+        Fn::GetAtt: CleanupRole.Arn
+      Runtime: nodejs12.x
+      Timeout: 25
+      Code: 
+        ZipFile: |
+          'use strict';
+          
+          var AWS      = require('aws-sdk');
+          var s3       = new AWS.S3();
+          
+          module.exports =  {
+            clearS3Bucket: function (event, context, cb) {
+              console.log("Event=", event);
+              console.log("Context=", context);
+              if (event.RequestType === 'Delete')  {
+                  var bucketName = event.ResourceProperties.BucketName;
+           
+                  console.log("Delete bucket requested for", bucketName);
+          
+                  var objects = listObjects(s3, bucketName);
+                
+                  objects.then(function(result) {
+                     var keysToDeleteArray = [];
+                     console.log("Found "+ result.Contents.length + " objects to delete.");
+                     if (result.Contents.length === 0) {
+                         sendResponse(event, context, "SUCCESS");
+                     } else {
+                         for (var i = 0, len = result.Contents.length; i < len; i++) {
+                             var item =  new Object();
+                             item = {};
+                             item = { Key: result.Contents[i].Key };
+                             keysToDeleteArray.push(item);
+                         }
+                  
+                         var delete_params = {
+                             Bucket: bucketName, 
+                             Delete: {
+                               Objects: keysToDeleteArray,
+                               Quiet: false
+                             }
+                         };
+                
+                         var deletedObjects = deleteObjects(s3, delete_params);
+             
+                         deletedObjects.then(function(result) {
+                             console.log("deleteObjects API returned ", result);    
+                             sendResponse(event, context, "SUCCESS");
+                         }, function(err) {
+                             console.log("ERROR: deleteObjects API Call failed!");
+                             console.log(err);
+                             sendResponse(event, context, "FAILED");
+                         });
+                     }
+                  }, function(err) {
+                     console.log("ERROR: listObjects API Call failed!");
+                     console.log(err);
+                     sendResponse(event, context, "FAILED");
+                  });
+                
+              } else {
+                console.log("Delete not requested.");
+                sendResponse(event, context, "SUCCESS");
+              }
+                
+            }
+          };
+          
+          function listObjects(client, bucketName) {
+            return new Promise(function (resolve, reject){
+              client.listObjectsV2({Bucket: bucketName}, function (err, res){
+                if (err) reject(err);
+                else resolve(res);
+              });
+            });
+          }
+            
+          function deleteObjects(client, params) {
+            return new Promise(function (resolve, reject){
+              client.deleteObjects(params, function (err, res){
+                if (err) reject(err);
+                else resolve(res);
+              });
+            });
+          }
+            
+          function sendResponse(event, context, responseStatus, responseData, physicalResourceId, noEcho) {
+            var responseBody = JSON.stringify({
+              Status: responseStatus,
+              Reason: "See the details in CloudWatch Log Stream: " + context.logStreamName,
+              PhysicalResourceId: physicalResourceId || context.logStreamName,
+              StackId: event.StackId,
+              RequestId: event.RequestId,
+              LogicalResourceId: event.LogicalResourceId,
+              NoEcho: noEcho || false,
+              Data: responseData
+            });
+            
+            console.log("Response body:\n", responseBody);
+                  
+            var https = require("https");
+            var url = require("url");
+                  
+            var parsedUrl = url.parse(event.ResponseURL);
+            var options = {
+              hostname: parsedUrl.hostname,
+              port: 443,
+              path: parsedUrl.path,
+              method: "PUT",
+              headers: {
+                "content-type": "",
+                "content-length": responseBody.length
+              }
+            };
+            
+            var request = https.request(options, function(response) {
+              console.log("Status code: " + response.statusCode);
+              console.log("Status message: " + response.statusMessage);
+              context.done();
+            });
+            
+            request.on("error", function(error) {
+              console.log("send(..) failed executing https.request(..): " + error);
+              context.done();
+            });
+          
+            request.write(responseBody);
+            request.end();
+          }
+          
+  CleanFlowBucketOnDelete:
+    Type: Custom::cleanupflowbucket
+    Properties:
+      ServiceToken: !GetAtt CleanBucketFunction.Arn
+      BucketName: !Ref FlowBucket
+  
+  CleanDataBucketOnDelete:
+    Type: Custom::cleanupdatabucket
+    Properties:
+      ServiceToken: !GetAtt CleanBucketFunction.Arn
+      BucketName: !Ref DataBucket
+  
+  CleanFinancialsBucketOnDelete:
+    Type: Custom::cleanupfinancialsbucket
+    Properties:
+      ServiceToken: !GetAtt CleanBucketFunction.Arn
+      BucketName: !Ref FinancialsBucket
+  
+  CleanOperationsBucketOnDelete:
+    Type: Custom::cleanupoperationsbucket
+    Properties:
+      ServiceToken: !GetAtt CleanBucketFunction.Arn
+      BucketName: !Ref OperationsBucket
+  
+  CleanDataScienceBucketOnDelete:
+    Type: Custom::cleanupdatasciencebucket
+    Properties:
+      ServiceToken: !GetAtt CleanBucketFunction.Arn
+      BucketName: !Ref DataScienceBucket
+  
+  CleanLogsBucketOnDelete:
+    Type: Custom::cleanuplogsbucket
+    Properties:
+      ServiceToken: !GetAtt CleanBucketFunction.Arn
+      BucketName: !Ref LogsBucket
+
+Outputs:
+  EC2PublicDNS:
+    Description: Web Host Public DNS Name
+    Value: !GetAtt [EC2Instance, PublicDnsName]
+  VpcId:
+    Description: The ID of the VPC 
+    Value: !Ref WebVPC
+  PublicSubnet:
+    Description: The ID of the Public Subnet
+    Value: !Ref WebSubnet
+  PublicSubnet2: 
+    Description: The ID of the Public Subnet
+    Value: !Ref WebSubnet2
+
+  UserName:
+    Description: The Name of the IAM User
+    Value: !Ref User
+  SecretKey: 
+    Description: The Secret Key of the IAM User
+    Value: !GetAtt AccessKey.SecretAccessKey
+
+  DBAppPublicDNS:
+    Description: DB App Public DNS Name
+    Value: !GetAtt [DBAppInstance, PublicDnsName]
+  DBEndpoint:
+    Description: DB Endpoint 
+    Value: !Sub ${DefaultDB.Endpoint.Address}:{DefaultDB.Endpoint.Port}
