@@ -203,6 +203,15 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-flowlogs"
   
+  MyBucket: 
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: "MyBucket"
+      Tags:
+        - Key: Name
+          Value: "MyBucket"
+  
   #############
   ###  IAM  ###
   #############
