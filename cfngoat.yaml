@@ -863,12 +863,6 @@ Resources:
     Properties:
       ServiceToken: !GetAtt CleanBucketFunction.Arn
       BucketName: !Ref LogsBucket
-    yaml:AWS::S3::Bucket:
-      Properties:
-        BucketEncryption:
-          ServerSideEncryptionConfiguration:
-            - ServerSideEncryptionByDefault:
-                SSEAlgorithm: AES256
 
 Outputs:
   EC2PublicDNS:
