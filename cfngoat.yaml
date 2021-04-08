@@ -888,6 +888,12 @@ Resources:
           ServerSideEncryptionConfiguration:
             - ServerSideEncryptionByDefault:
                 SSEAlgorithm: AES256
+    yaml:AWS::S3::Bucket:
+      Properties:
+        BucketEncryption:
+          ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256
 
 Outputs:
   EC2PublicDNS:
