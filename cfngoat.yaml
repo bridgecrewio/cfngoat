@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: AWS CloudFormation Template to deploy insecure infrastructure
+Description: AWS cloudFormation Template to deploy insecure infrastructure
 Parameters:
   CompanyName:
     Description: Company Name
