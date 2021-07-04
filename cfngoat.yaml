@@ -265,6 +265,8 @@ Resources:
     Properties:
       AliasName: !Sub "alias/${AWS::AccountId}-${CompanyName}-${Environment}-logs-bucket-key"
       TargetKeyId: !Ref LogsKey
+      
+      
 
   ################
   ###  DB App  ###
