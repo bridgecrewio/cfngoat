@@ -10,7 +10,7 @@ Parameters:
     Type: String
     Default: dev
   DBName:
-    Description: Name of the Database
+    Description: Name of the Database1
     Type: String
     Default: db1
   Password: 
