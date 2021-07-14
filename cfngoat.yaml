@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: AWS CloudFormation Template to deploy insecure infrastructure
 Parameters:
   CompanyName:
-    Description: Company Name
+    Description: Company Name1
     Type: String
     Default: acme
   Environment: 
@@ -10,7 +10,7 @@ Parameters:
     Type: String
     Default: dev
   DBName:
-    Description: Name of the Database
+    Description: Name of the Database1
     Type: String
     Default: db1
   Password: 
