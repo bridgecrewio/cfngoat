@@ -40,6 +40,8 @@ Resources:
       Runtime: nodejs12.x
       Role: !GetAtt IAM4Lambda.Arn
       Handler: exports.test
+      Tracing_config:
+        Mode: "Active"
       Code:
         ZipFile: | 
           console.log("Hello World");
