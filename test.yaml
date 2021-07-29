@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS CloudFormation Template to deploy insecure infrastructure
+Parameters:
+  CompanyName:
+    Description: Company Name
+    Type: String
+    Default: acme
+  Environment: 
+    Description: Environment
+    Type: String
+    Default: dev
+
+Resources:
+  IAM4Lambda:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-analysis-lambda"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement: 
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-analysis-lambda"
+        - Key: Environment
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}"
+
+
+   AnalysisLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-analysis"
+      Runtime: nodejs12.x
+      Role: !GetAtt IAM4Lambda.Arn
+      Handler: exports.test
+      Code:
+        ZipFile: | 
+          console.log("Hello World");
+      Environment: 
+        Variables:
+          access_key: "AKIAIOSFODNN7EXAMPLE"
+          secret_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-analysis"
+        - Key: Environment
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}"
