@@ -33,7 +33,7 @@ Resources:
     Properties:
       AvailabilityZone: 
         Fn::Select:
-        - 0
+        - "0"
         - Fn::GetAZs: ""
       InstanceType: t2.nano
       SecurityGroupIds: 
@@ -60,7 +60,7 @@ Resources:
     Type: AWS::EC2::Volume
     Properties: 
       AvailabilityZone: !Select 
-        - 0
+        - "0"
         - Fn::GetAZs: ""
       #Encrypted: False
       Size: 1
@@ -114,7 +114,7 @@ Resources:
       VpcId: !Ref WebVPC
       CidrBlock: 172.16.10.0/24
       AvailabilityZone: !Select
-        - 0
+        - "0"
         - Fn::GetAZs: ""
       MapPublicIpOnLaunch: True
       Tags:
@@ -157,7 +157,8 @@ Resources:
 
   WebDefaultPublicRoute:
     Type: AWS::EC2::Route
-    DependsOn: InternetGatewayAttachment
+    DependsOn:
+    - InternetGatewayAttachment
     Properties:
       RouteTableId: !Ref WebRTB
       DestinationCidrBlock: 0.0.0.0/0
@@ -285,7 +286,7 @@ Resources:
       DBInstanceIdentifier: !Sub "rds-${AWS::AccountId}-${CompanyName}-${Environment}"
       EngineVersion: 8.0
       DBInstanceClass: db.t3.micro
-      AllocatedStorage: 20
+      AllocatedStorage: "20"
       MasterUsername: admin
       MasterUserPassword: !Ref Password
       MultiAZ: False
@@ -305,6 +306,7 @@ Resources:
       EngineName: mysql
       MajorEngineVersion: 8.0
       OptionGroupDescription: CloudFormation OG
+      OptionConfigurations: {}
       Tags:
         - Key: Name
           Value: !Sub "og-${AWS::AccountId}-${CompanyName}-${Environment}"
@@ -409,7 +411,7 @@ Resources:
     Properties:
       AvailabilityZone:
         Fn::Select:
-        - 0
+        - "0"
         - Fn::GetAZs: ""
       ImageId: !Ref LatestAmiId
       InstanceType: t2.nano
@@ -695,11 +697,14 @@ Resources:
 
   CleanBucketFunction:
     Type: "AWS::Lambda::Function"
-    DependsOn: CleanupRole
+    DependsOn:
+    - CleanupRole
     Properties:
       Handler: index.clearS3Bucket
-      Role: 
-        Fn::GetAtt: CleanupRole.Arn
+      Role:
+        Fn::GetAtt:
+          - CleanupRole
+          - Arn
       Runtime: nodejs12.x
       Timeout: 25
       Code: 

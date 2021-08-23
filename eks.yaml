@@ -63,8 +63,8 @@ Resources:
       EnableDnsSupport: true
       EnableDnsHostnames: true
       Tags:
-      - Key: Name
-        Value: !Sub '${AWS::StackName}-VPC'
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-VPC'
   InternetGateway:
     Type: "AWS::EC2::InternetGateway"
   VPCGatewayAttachment:
@@ -77,32 +77,31 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       Tags:
-      - Key: Name
-        Value: Public Subnets
-      - Key: Network
-        Value: Public
-
+        - Key: Name
+          Value: Public Subnets
+        - Key: Network
+          Value: Public
   PrivateRouteTable01:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
       Tags:
-      - Key: Name
-        Value: Private Subnet AZ1
-      - Key: Network
-        Value: Private01
-
+        - Key: Name
+          Value: Private Subnet AZ1
+        - Key: Network
+          Value: Private01
   PrivateRouteTable02:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
       Tags:
-      - Key: Name
-        Value: Private Subnet AZ2
-      - Key: Network
-        Value: Private02
+        - Key: Name
+          Value: Private Subnet AZ2
+        - Key: Network
+          Value: Private02
   PublicRoute:
-    DependsOn: VPCGatewayAttachment
+    DependsOn:
+    - VPCGatewayAttachment
     Type: AWS::EC2::Route
     Properties:
       RouteTableId: !Ref PublicRouteTable
@@ -136,8 +135,8 @@ Resources:
       AllocationId: !GetAtt 'NatGatewayEIP1.AllocationId'
       SubnetId: !Ref PublicSubnet01
       Tags:
-      - Key: Name
-        Value: !Sub '${AWS::StackName}-NatGatewayAZ1'
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-NatGatewayAZ1'
   NatGateway02:
     DependsOn:
     - NatGatewayEIP2
@@ -148,8 +147,8 @@ Resources:
       AllocationId: !GetAtt 'NatGatewayEIP2.AllocationId'
       SubnetId: !Ref PublicSubnet02
       Tags:
-      - Key: Name
-        Value: !Sub '${AWS::StackName}-NatGatewayAZ2'
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-NatGatewayAZ2'
   NatGatewayEIP1:
     DependsOn:
     - VPCGatewayAttachment
@@ -177,8 +176,8 @@ Resources:
       VpcId:
         Ref: VPC
       Tags:
-      - Key: Name
-        Value: !Sub "${AWS::StackName}-PublicSubnet01"
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-PublicSubnet01"
   PublicSubnet02:
     Type: AWS::EC2::Subnet
     Metadata:
@@ -189,13 +188,13 @@ Resources:
           - '1'
           - Fn::GetAZs:
               Ref: AWS::Region
-        CidrBlock:
-          Ref: PublicSubnet02Block
-        VpcId:
-          Ref: VPC
+      CidrBlock:
+        Ref: PublicSubnet02Block
+      VpcId:
+        Ref: VPC
       Tags:
-      - Key: Name
-        Value: !Sub "${AWS::StackName}-PublicSubnet02"
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-PublicSubnet02"
   PrivateSubnet01:
     Type: AWS::EC2::Subnet
     Metadata:
@@ -211,10 +210,10 @@ Resources:
       VpcId:
         Ref: VPC
       Tags:
-      - Key: Name
-        Value: !Sub "${AWS::StackName}-PrivateSubnet01"
-      - Key: "kubernetes.io/role/internal-elb"
-        Value: 1
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-PrivateSubnet01"
+        - Key: "kubernetes.io/role/internal-elb"
+          Value: "1"
   PrivateSubnet02:
     Type: AWS::EC2::Subnet
     Metadata:
@@ -230,10 +229,10 @@ Resources:
       VpcId:
         Ref: VPC
       Tags:
-      - Key: Name
-        Value: !Sub "${AWS::StackName}-PrivateSubnet02"
-      - Key: "kubernetes.io/role/internal-elb"
-        Value: 1
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-PrivateSubnet02"
+        - Key: "kubernetes.io/role/internal-elb"
+          Value: "1"
   PublicSubnet01RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -265,14 +264,14 @@ Resources:
       Name: !Ref EKSClusterName
       RoleArn:
         "Fn::GetAtt": ["EKSIAMRole", "Arn"]
-        ResourcesVpcConfig:
-          SecurityGroupIds:
-          - !Ref ControlPlaneSecurityGroup
-          SubnetIds:
-          - !Ref PublicSubnet01
-          - !Ref PublicSubnet02
-          - !Ref PrivateSubnet01
-          - !Ref PrivateSubnet02
+      ResourcesVpcConfig:
+        SecurityGroupIds:
+        - !Ref ControlPlaneSecurityGroup
+        SubnetIds:
+        - !Ref PublicSubnet01
+        - !Ref PublicSubnet02
+        - !Ref PrivateSubnet01
+        - !Ref PrivateSubnet02
     DependsOn: [EKSIAMRole, PublicSubnet01, PublicSubnet02, PrivateSubnet01, PrivateSubnet02, ControlPlaneSecurityGroup]
 Outputs:
   SubnetIds:
