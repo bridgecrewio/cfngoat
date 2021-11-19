@@ -601,6 +601,17 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-data"
+  
+  DataBucket2:
+    # Public, not encrypted, no access logs, no versioning
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-data2"
+      AccessControl: PublicRead
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-data2"
 
   ### TODO - Custom Upload of insecure document
 
