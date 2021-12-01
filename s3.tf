@@ -96,6 +96,8 @@ resource "aws_s3_bucket" "financials" {
 }
 
 
+
+
 resource "aws_s3_bucket" "operations" {
   # bucket is not encrypted
   # bucket does not have access logs
