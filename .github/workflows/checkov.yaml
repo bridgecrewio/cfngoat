@@ -11,6 +11,10 @@ jobs:
         python-version: [3.7]
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run yor action
+        uses: bridgecrewio/yor-action@main
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
