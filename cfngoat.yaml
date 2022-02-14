@@ -99,7 +99,7 @@ Resources:
           Value: jonathan.jozwiak/nimrodkor
         - Key: git_last_modified_at
           Value: "2021-08-23 13:51:41"
-      Encrypted: True
+      Encrypted: False
 
   ### CFN Does not Support Volume Snapshot
   EBSAttachment:
