@@ -401,7 +401,7 @@ Resources:
           Value: jonathan.jozwiak/nimrodkor
   AccessKey:
     Type: AWS::IAM::AccessKey
-    Properties:dQMxWBOORQYjfkmXs+yGV5SPdNlIF/V8dHB0sssw
+    Properties:
       UserName: !Ref User
   UserPolicy:
     Type: AWS::IAM::Policy
@@ -487,7 +487,6 @@ Resources:
       BackupRetentionPeriod: 0
       StorageEncrypted: False
       MonitoringInterval: 0
-      PubliclyAccessible: True
       Tags:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-rds"
