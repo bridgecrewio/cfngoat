@@ -75,6 +75,19 @@ If you need direct support you can contact us at [info@bridgecrew.io](mailto:inf
 
 ## Existing vulnerabilities (Auto-Generated)
 
+|    | check_id    | file                             | resource                  | check_name                                                            | guideline                                                                                                                               |
+|----|-------------|----------------------------------|---------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+|  0 | CKV_AWS_21  | /terraform/simple_instance/s3.tf | aws_s3_bucket.docking_bay | Ensure all data stored in the S3 bucket have versioning enabled       | https://docs.bridgecrew.io/docs/s3_16-enable-versioning                                                                                 |
+|  1 | CKV_AWS_18  | /terraform/simple_instance/s3.tf | aws_s3_bucket.docking_bay | Ensure the S3 bucket has access logging enabled                       | https://docs.bridgecrew.io/docs/s3_13-enable-logging                                                                                    |
+|  2 | CKV_AWS_145 | /terraform/simple_instance/s3.tf | aws_s3_bucket.docking_bay | Ensure that S3 buckets are encrypted with KMS by default              | https://docs.bridgecrew.io/docs/ensure-that-s3-buckets-are-encrypted-with-kms-by-default                                                |
+|  3 | CKV_AWS_144 | /terraform/simple_instance/s3.tf | aws_s3_bucket.docking_bay | Ensure that S3 bucket has cross-region replication enabled            | https://docs.bridgecrew.io/docs/ensure-that-s3-bucket-has-cross-region-replication-enabled                                              |
+|  4 | CKV_AWS_19  | /terraform/simple_instance/s3.tf | aws_s3_bucket.docking_bay | Ensure all data stored in the S3 bucket is securely encrypted at rest | https://docs.bridgecrew.io/docs/s3_14-data-encrypted-at-rest                                                                            |
+|  5 | CKV2_AWS_6  | /terraform/simple_instance/s3.tf | aws_s3_bucket.docking_bay | Ensure that S3 bucket has a Public Access block                       | https://docs.bridgecrew.io/docs/s3-bucket-should-have-public-access-blocks-defaults-to-false-if-the-public-access-block-is-not-attached |
+
+
+---
+
+
 |    | check_id    | file          | resource                                  | check_name                                                                                                                                                                                               | guideline                                                                                                                    |
 |----|-------------|---------------|-------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
 |  0 | CKV_AWS_58  | /eks.yaml     | AWS::EKS::Cluster.EKSCluster              | Ensure EKS Cluster has Secrets Encryption Enabled                                                                                                                                                        | https://docs.bridgecrew.io/docs/bc_aws_kubernetes_3                                                                          |
