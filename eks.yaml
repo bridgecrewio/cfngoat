@@ -60,7 +60,7 @@ Resources:
         - Key: git_last_modified_by
           Value: mike@bridgecrew.io
         - Key: yor_trace
-          Value: d0c28b39-b842-4803-a7b8-a4ea8056eb99
+          Value: Vinay7820
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -236,15 +236,15 @@ Resources:
         - Key: git_file
           Value: eks.yaml
         - Key: git_commit
-          Value: 52127b2051fa27ca5168b17798cd4f63723a13f1
+          Value: 1aab848a22a383d185f8d0d6ed344076f636769b
         - Key: git_modifiers
-          Value: mike/nimrodkor
+          Value: mike
         - Key: git_last_modified_at
-          Value: "2021-08-23 07:51:59"
+          Value: 2020-07-15 20:22:37
         - Key: git_last_modified_by
-          Value: nimrodkor@gmail.com
+          Value: mike@bridgecrew.io
         - Key: yor_trace
-          Value: 8627abe2-fcd0-47da-a257-3d190b4b4081
+          Value: Vinay7820
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -257,7 +257,7 @@ Resources:
       Domain: vpc
       Tags:
         - Key: git_org
-          Value: bridgecrewio
+          Value: Vinay7820
         - Key: git_repo
           Value: cfngoat
         - Key: git_file
@@ -307,7 +307,7 @@ Resources:
         Ref: VPC
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::StackName}-PublicSubnet02"
+          Value: Vinay7820
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -421,7 +421,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
         - Key: yor_trace
-          Value: 01a28bb3-8cc4-497e-af24-f3c445a754ce
+          Value: Vinay7820
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
