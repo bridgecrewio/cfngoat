@@ -145,6 +145,7 @@ Resources:
           Value: d4d72008-2b73-4635-9df6-8035c8850d66
         - Key: git_org
           Value: bridgecrewio
+          
   WebVPC:
     Type: AWS::EC2::VPC
     Properties:
