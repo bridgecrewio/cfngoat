@@ -129,7 +129,7 @@ Resources:
         ToPort: 0
         CidrIp: 0.0.0.0/0
       Tags:
-        - Key: git_repo
+        - Key: git_repo 
           Value: cfngoat
         - Key: git_file
           Value: cfngoat.yaml
