@@ -456,6 +456,7 @@ Resources:
           Value: cfngoat.yaml
         - Key: git_commit
           Value: 42153ba22c28f5c0bff388b24a6344137a5dfe26
+      EnableKeyRotation: True
   LogsKeyAlias:
     Type: AWS::KMS::Alias
     Properties:
