@@ -8,6 +8,7 @@ Parameters:
     Type: String
     Description: The desired name of your AWS EKS Cluster.
     
+    
   VpcBlock:
     Type: String
     Default: 192.168.0.0/16

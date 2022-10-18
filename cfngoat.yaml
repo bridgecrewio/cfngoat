@@ -200,6 +200,7 @@ Resources:
           Value: "2021-08-23 13:51:41"
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
+          
   WebSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
@@ -893,6 +894,7 @@ Resources:
       Environment:
         Variables:
           access_key: "AKIAIOSFODNN7EXAMPLE"
+	# checkov:skip=CKV_SECRET_2: ADD REASON
           secret_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
       Tags:
         - Key: Name
