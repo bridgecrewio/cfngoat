@@ -945,6 +945,13 @@ Resources:
           Value: 509b197d-4f87-4ae1-aa43-8cca13c9e92e
         - Key: git_org
           Value: bridgecrewio
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        IgnorePublicAcls: True
+        RestrictPublicBuckets: True
 
   ### TODO - Custom Upload of insecure document
   FinancialsBucket:
