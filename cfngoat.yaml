@@ -101,7 +101,6 @@ Resources:
           Value: "2021-08-23 13:51:41"
       Encrypted: True
 
-
   ### CFN Does not Support Volume Snapshot
   EBSAttachment:
     Type: AWS::EC2::VolumeAttachment
@@ -372,6 +371,9 @@ Resources:
           Value: "2021-08-23 13:51:41"
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
+      VersioningConfiguration:
+        Status: Enabled
+
 
   #############
   ###  IAM  ###
