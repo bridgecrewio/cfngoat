@@ -1,0 +1,14 @@
+name: yor-tagging
+on:
+  # Trigger the workflow on pull request,
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run yor action
+        uses: bridgecrewio/yor-action@main
