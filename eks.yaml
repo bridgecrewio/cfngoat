@@ -234,15 +234,15 @@ Resources:
       Domain: vpc
       Tags:
         - Key: git_file
-          Value: 1aab848a22a383d185f8d0d6ed344076f636769b
+          Value: eks.yaml
         - Key: git_commit
-          Value: mike
+          Value: 1aab848a22a383d185f8d0d6ed344076f636769b
         - Key: git_modifiers
-          Value: 2020-07-15 20:22:37
+          Value: mike
         - Key: git_last_modified_at
-          Value: mike@bridgecrew.io
+          Value: 2020-07-15 20:22:37
         - Key: git_last_modified_by
-          Value: nimrodkor@gmail.com
+          Value: mike@bridgecrew.io
         - Key: yor_trace
           Value: Juliandreslopez
         - Key: git_org
