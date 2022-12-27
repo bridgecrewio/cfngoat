@@ -44,7 +44,7 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-ec2" 
         - Key: yor_trace
-          Value: 595b9b79-bd1e-45fd-a297-d521ebdf15e7
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -86,7 +86,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 838685b6-8fac-42eb-9cf4-008dd36216a1
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -142,7 +142,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: d4d72008-2b73-4635-9df6-8035c8850d66
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
   WebVPC:
@@ -153,7 +153,7 @@ Resources:
       EnableDnsHostnames: True
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-vpc"
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -184,7 +184,7 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-subnet"
         - Key: yor_trace
-          Value: 4f6434ca-b2c2-4fe3-88fc-9ad969965958
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -219,7 +219,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 68c27f34-7110-458d-98b3-b9a7307638dc
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -235,7 +235,7 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-igw"
         - Key: yor_trace
-          Value: 39d8202d-7126-40dd-afa0-4554eeadada4
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -271,7 +271,7 @@ Resources:
         - Key: git_last_modified_by
           Value: jonathan.jozwiak@googlemail.com
         - Key: yor_trace
-          Value: 0613f2a9-ccbb-4e77-839b-bc0a7681bd9c
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -308,7 +308,7 @@ Resources:
         - Key: git_last_modified_by
           Value: jonathan.jozwiak@googlemail.com
         - Key: yor_trace
-          Value: ebfdc86d-55a5-4df1-88fd-2f3bc869549c
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -335,7 +335,7 @@ Resources:
         - Key: git_last_modified_by
           Value: jonathan.jozwiak@googlemail.com
         - Key: yor_trace
-          Value: 077d3a3d-66bc-4fe9-8839-b59a40785234
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -355,7 +355,7 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-flowlogs"
         - Key: yor_trace
-          Value: a148a687-a031-4491-8fc9-6bb78fef0572
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -388,7 +388,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 346804e2-5a21-4f1b-a8bf-f3c3fc9c7d15
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -447,7 +447,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: bd68272a-4d3b-44e6-a2f0-ad783935c332
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -492,7 +492,7 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-rds"
         - Key: Environment
-          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}"
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -524,7 +524,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 6d7cc8b8-ee12-4ad2-940c-324b6eeca646
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -557,7 +557,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 88c3fff0-8627-4e00-8e10-086c1651370a
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -590,7 +590,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 3c0704d6-7b98-472d-a6b2-c3085cb87024
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -610,7 +610,7 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-rds-sg"
         - Key: Environment
-          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}"
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -665,7 +665,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 47d128cd-8fec-4d80-a768-e5e4c133b61a
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -714,7 +714,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 35854694-8244-4717-8f50-146fbec15c61
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -864,7 +864,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 2c07712d-22f5-42be-946e-1c2e71d2e275
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -897,7 +897,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 5939cdf9-4e86-4208-80d1-095c367c2c13
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -937,7 +937,7 @@ Resources:
         - Key: git_last_modified_by
           Value: jonathan.jozwiak@googlemail.com
         - Key: yor_trace
-          Value: 509b197d-4f87-4ae1-aa43-8cca13c9e92e
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
 
@@ -963,7 +963,7 @@ Resources:
         - Key: git_last_modified_by
           Value: jonathan.jozwiak@googlemail.com
         - Key: yor_trace
-          Value: 7d0b70d4-58fb-4d2d-b966-177d349932da
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -979,7 +979,7 @@ Resources:
         Status: Enabled
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-operations"
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -1024,7 +1024,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 11266986-850e-41eb-b980-7b4d8d49f919
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
   LogsBucket:
@@ -1045,7 +1045,7 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-logs"
         - Key: yor_trace
-          Value: 7c5f90f1-7102-45dc-bead-02754df64eba
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -1107,7 +1107,7 @@ Resources:
         - Key: git_last_modified_by
           Value: jonathan.jozwiak@googlemail.com
         - Key: yor_trace
-          Value: 573995a2-e3f4-43a6-847d-df474b0fc71a
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
@@ -1259,7 +1259,7 @@ Resources:
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
         - Key: yor_trace
-          Value: 75847e0e-ba4e-46e5-8c36-cd934d666acd
+          Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
         - Key: git_repo
