@@ -940,6 +940,8 @@ Resources:
           Value: Juliandreslopez
         - Key: git_org
           Value: bridgecrewio
+      PublicAccessBlockConfiguration:
+        RestrictPublicBuckets: True
 
   ### TODO - Custom Upload of insecure document
   FinancialsBucket:
