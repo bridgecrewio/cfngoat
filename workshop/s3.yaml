@@ -1,0 +1,22 @@
+Resources:
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Retain
+    Properties:
+      Tags:
+        - Key: Class
+          Value: Sovereign
+        - Key: Tag
+          Value: Fine
+      BucketName: !Join
+        - "-"
+        - - "starship-bay3"
+          - !Select
+            - 0
+            - !Split
+              - "-"
+              - !Select
+                - 2
+                - !Split
+                  - "/"
+                  - !Ref "AWS::StackId" 
